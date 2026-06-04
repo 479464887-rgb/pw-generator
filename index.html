@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Password Generator - 免费在线工具</title>
+<meta name="description" content="安全密码生成器 - 一键生成高强度随机密码，支持自定义长度和字符集">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh;display:flex;flex-direction:column}
+header{background:#161b22;border-bottom:1px solid #30363d;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:18px;font-weight:700;color:#58a6ff}
+.logo span{color:#f0c040}
+header .badge{font-size:10px;background:#daa520;color:#fff;padding:2px 8px;border-radius:10px;margin-left:8px}
+main{max-width:700px;margin:0 auto;padding:32px 24px;flex:1}
+.tool-wrapper{padding:20px 0}
+footer{padding:16px 24px;border-top:1px solid #21262d;text-align:center;font-size:12px;color:#484f58}
+footer a{color:#58a6ff;text-decoration:none;margin:0 8px}
+.btn-primary:hover{background:#2ea043!important}
+.btn:hover{background:#30363d!important}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🛠 <span>Dev</span>Kit<span class="badge">BETA</span></div>
+  <div style="font-size:11px;color:#8b949e">🔒 本地处理 · 数据不上传</div>
+</header>
+<main>
+  <h1 style="font-size:24px;margin-bottom:4px">Password Generator</h1>
+  <p style="color:#8b949e;font-size:14px;margin-bottom:8px">安全密码生成器 - 一键生成高强度随机密码，支持自定义长度和字符集</p>
+<div class="tool-wrapper">
+  <div id="pw-display" style="background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px;text-align:center;margin-bottom:16px">
+    <div id="pw-text" style="font-size:28px;font-weight:700;font-family:'SF Mono','Consolas',monospace;color:#3fb950;letter-spacing:3px;word-break:break-all;min-height:42px">点击下方生成</div>
+    <div id="pw-strength" style="margin-top:8px;font-size:12px"></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    <div style="flex:1;min-width:100px"><label style="font-size:12px;color:#8b949e">长度</label><input type="range" id="pw-length" min="8" max="64" value="20" style="width:100%" oninput="document.getElementById('pw-len-val').textContent=this.value"><span id="pw-len-val" style="font-size:12px;color:#58a6ff">20</span></div>
+  </div>
+  <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+    <label style="font-size:13px;display:flex;align-items:center;gap:4px"><input type="checkbox" id="pw-lower" checked> 小写</label>
+    <label style="font-size:13px;display:flex;align-items:center;gap:4px"><input type="checkbox" id="pw-upper" checked> 大写</label>
+    <label style="font-size:13px;display:flex;align-items:center;gap:4px"><input type="checkbox" id="pw-numbers" checked> 数字</label>
+    <label style="font-size:13px;display:flex;align-items:center;gap:4px"><input type="checkbox" id="pw-symbols" checked> 符号</label>
+  </div>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn-primary" style="flex:1;padding:12px;background:#238636;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600" onclick="generatePW()">🔄 生成密码</button>
+    <button class="btn" style="padding:12px 24px;background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:8px;cursor:pointer;font-size:14px" onclick="copyPW()">📋 复制</button>
+  </div>
+</div>
+</main>
+<footer>
+  <a href="https://github.com/479464887-rgb/pw-generator">GitHub</a>
+  <span>·</span>
+  <a href="mailto:tulv202900@163.com">Contact</a>
+  <span>·</span>
+  <span>© 2026 DevKit</span>
+</footer>
+<script>
+function generatePW() {
+  const len = parseInt(document.getElementById('pw-length').value);
+  let chars = '';
+  if (document.getElementById('pw-lower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+  if (document.getElementById('pw-upper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if (document.getElementById('pw-numbers').checked) chars += '0123456789';
+  if (document.getElementById('pw-symbols').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+  if (!chars) return alert('请至少选择一种字符类型');
+  const arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  let pw = '';
+  for (let i = 0; i < len; i++) pw += chars[arr[i] % chars.length];
+  document.getElementById('pw-text').textContent = pw;
+  let score = 0;
+  if (len >= 12) score++; if (len >= 20) score++; if (len >= 32) score++;
+  if (document.getElementById('pw-lower').checked) score++;
+  if (document.getElementById('pw-upper').checked) score++;
+  if (document.getElementById('pw-numbers').checked) score++;
+  if (document.getElementById('pw-symbols').checked) score++;
+  const levels = ['弱','一般','强','很强','极强','无敌'];
+  const colors = ['#f85149','#d29922','#d29922','#3fb950','#3fb950','#58a6ff'];
+  document.getElementById('pw-strength').innerHTML = `强度: <span style="color:${colors[Math.min(score,5)]}">${levels[Math.min(score,5)]}</span>`;
+}
+function copyPW() {
+  const pw = document.getElementById('pw-text').textContent;
+  if (pw === '点击下方生成') return;
+  navigator.clipboard.writeText(pw).then(() => {
+    const el = document.getElementById('pw-text');
+    const orig = el.textContent;
+    el.textContent = '✓ 已复制!';
+    el.style.color = '#3fb950';
+    setTimeout(() => { el.textContent = orig; el.style.color = '#3fb950'; }, 1500);
+  });
+}
+generatePW();
+</script>
+</body>
+</html>
