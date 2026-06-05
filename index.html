@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Password Generator - 免费在线工具</title>
-<meta name="description" content="安全密码生成器 - 一键生成高强度随机密码，支持自定义长度和字符集">
+<title>Password Generator - 免费Online Tools</title>
+<meta name="description" content="安全PasswordGenerate器 - 一键Generate高强度随机Password，支持自定义Length和字符集">
 <style>*{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh;display:flex;flex-direction:column}
 header{background:#161b22;border-bottom:1px solid #30363d;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
@@ -23,18 +23,18 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!import
 <body>
 <header>
   <div class="logo">🛠 <span>Dev</span>Kit<span class="badge">BETA</span></div>
-  <div style="font-size:11px;color:#8b949e">🔒 本地处理 · 数据不上传</div>
+  <div style="font-size:11px;color:#8b949e">🔒 Processed locally · 数据不Upload</div>
 </header>
 <main>
   <h1 style="font-size:24px;margin-bottom:4px">Password Generator</h1>
-  <p style="color:#8b949e;font-size:14px;margin-bottom:8px">安全密码生成器 - 一键生成高强度随机密码，支持自定义长度和字符集</p>
+  <p style="color:#8b949e;font-size:14px;margin-bottom:8px">安全PasswordGenerate器 - 一键Generate高强度随机Password，支持自定义Length和字符集</p>
 <div class="tool-wrapper">
   <div id="pw-display" style="background:#161b22;border:1px solid #30363d;border-radius:12px;padding:24px;text-align:center;margin-bottom:16px">
-    <div id="pw-text" style="font-size:28px;font-weight:700;font-family:'SF Mono','Consolas',monospace;color:#3fb950;letter-spacing:3px;word-break:break-all;min-height:42px">点击下方生成</div>
+    <div id="pw-text" style="font-size:28px;font-weight:700;font-family:'SF Mono','Consolas',monospace;color:#3fb950;letter-spacing:3px;word-break:break-all;min-height:42px">Click下方Generate</div>
     <div id="pw-strength" style="margin-top:8px;font-size:12px"></div>
   </div>
   <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
-    <div style="flex:1;min-width:100px"><label style="font-size:12px;color:#8b949e">长度</label><input type="range" id="pw-length" min="8" max="64" value="20" style="width:100%" oninput="document.getElementById('pw-len-val').textContent=this.value"><span id="pw-len-val" style="font-size:12px;color:#58a6ff">20</span></div>
+    <div style="flex:1;min-width:100px"><label style="font-size:12px;color:#8b949e">Length</label><input type="range" id="pw-length" min="8" max="64" value="20" style="width:100%" oninput="document.getElementById('pw-len-val').textContent=this.value"><span id="pw-len-val" style="font-size:12px;color:#58a6ff">20</span></div>
   </div>
   <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
     <label style="font-size:13px;display:flex;align-items:center;gap:4px"><input type="checkbox" id="pw-lower" checked> 小写</label>
@@ -43,8 +43,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!import
     <label style="font-size:13px;display:flex;align-items:center;gap:4px"><input type="checkbox" id="pw-symbols" checked> 符号</label>
   </div>
   <div style="display:flex;gap:8px">
-    <button class="btn btn-primary" style="flex:1;padding:12px;background:#238636;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600" onclick="generatePW()">🔄 生成密码</button>
-    <button class="btn" style="padding:12px 24px;background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:8px;cursor:pointer;font-size:14px" onclick="copyPW()">📋 复制</button>
+    <button class="btn btn-primary" style="flex:1;padding:12px;background:#238636;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600" onclick="generatePW()">🔄 GeneratePassword</button>
+    <button class="btn" style="padding:12px 24px;background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:8px;cursor:pointer;font-size:14px" onclick="copyPW()">📋 Copy</button>
   </div>
 </div>
 </main>
@@ -81,11 +81,11 @@ function generatePW() {
 }
 function copyPW() {
   const pw = document.getElementById('pw-text').textContent;
-  if (pw === '点击下方生成') return;
+  if (pw === 'Click下方Generate') return;
   navigator.clipboard.writeText(pw).then(() => {
     const el = document.getElementById('pw-text');
     const orig = el.textContent;
-    el.textContent = '✓ 已复制!';
+    el.textContent = '✓ 已Copy!';
     el.style.color = '#3fb950';
     setTimeout(() => { el.textContent = orig; el.style.color = '#3fb950'; }, 1500);
   });
