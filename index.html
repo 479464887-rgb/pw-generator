@@ -10,7 +10,14 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>">
 
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>">
+<meta name="theme-color" content="#0d1117">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta property="og:title" content="Password Generator - 免费Online Tools — DevKit Tools">
+<meta property="og:description" content="安全PasswordGenerate器 - 一键Generate高强度随机Password，支持自定义Length和字符集">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://479464887-rgb.github.io/pw-generator/">
+<meta name="twitter:card" content="summary_large_image">
 <title>Password Generator - 免费Online Tools</title>
 <meta name="description" content="安全PasswordGenerate器 - 一键Generate高强度随机Password，支持自定义Length和字符集">
 <style>*{margin:0;padding:0;box-sizing:border-box}
@@ -73,6 +80,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!import
   <span>© 2026 DevKit</span>
 </footer>
 <script>
+'use strict';
 function generatePW() {
   const len = parseInt(document.getElementById('pw-length').value);
   let chars = '';
